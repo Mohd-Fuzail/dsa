@@ -1,0 +1,36 @@
+void dfs(vector<vector<int>> &edges,unordered_map<int, list<int>> &adjlist,unordered_map<int ,bool> &check,  vector<int> &ans,int node){
+    ans.push_back(node);
+    check[node]=true;
+    for(auto i: adjlist[node]){
+    if(!check[i]){
+      dfs(edges,adjlist,check,ans,i);
+        
+}}
+}
+
+
+
+vector<vector<int>> depthFirstSearch(int V, int E, vector<vector<int>> &edges)
+{
+   unordered_map<int, list<int>> adjlist;
+    
+    for(int i=0;i<edges.size();i++){
+        int u=edges[i][0];
+        int v=edges[i][1];
+        adjlist[u].push_back(v);
+        adjlist[v].push_back(u);
+    }
+    
+    unordered_map<int ,bool> check;
+    vector<vector<int>> ANS;
+  
+    for(int i=0;i<V;i++){
+        if(!check[i]){
+               vector<int>ans;
+    dfs(edges,adjlist,check,ans,i);
+         ANS.push_back(ans);
+        }}
+    
+    return ANS;
+    
+}
